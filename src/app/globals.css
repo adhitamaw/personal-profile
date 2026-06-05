@@ -199,15 +199,38 @@ h1, h2, h3, h4, h5 {
 }
 
 .page-section {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
   scroll-margin-top: 5rem;
+  border-top: 1px solid var(--border-light);
 }
 
 .page-section-first {
-  padding-top: 1.25rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
   scroll-margin-top: 5rem;
+}
+
+/* Lighter heading for blocks nested inside a major section */
+.subhead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.subhead h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.subhead::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-light);
 }
 
 .link-arrow {

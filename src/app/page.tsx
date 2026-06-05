@@ -1,11 +1,13 @@
-import { ArrowRight, Download, GraduationCap, Award } from "lucide-react";
+import { ArrowRight, Download, GraduationCap, Award, ExternalLink } from "lucide-react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import DataProfileCard from "@/components/DataProfileCard";
 import MetricsBar from "@/components/MetricsBar";
 import SectionHeader from "@/components/SectionHeader";
+import SubHeader from "@/components/SubHeader";
 import ProjectsView from "@/components/ProjectsView";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import ContactForm from "@/components/ContactForm";
+import { GitHubIcon, LinkedInIcon } from "@/components/SocialIcons";
 import { assetUrl } from "@/lib/assets";
 import {
   getProfile,
@@ -13,6 +15,12 @@ import {
   getProjects,
   getSkillGroups,
 } from "@/lib/data";
+
+// External links for publications, keyed by title (stable across data sources).
+const PUBLICATION_LINKS: Record<string, string> = {
+  "Network Anomaly Detection for Intrusion Detection Systems Using Q-Learning and Deep Q-Learning":
+    "https://ieeexplore.ieee.org/document/11279087",
+};
 
 export default async function HomePage() {
   const [profile, allExperiences, projects, skillGroups] = await Promise.all([
@@ -139,7 +147,7 @@ export default async function HomePage() {
 
         {education.length > 0 && (
           <div className="mt-10">
-            <SectionHeader label="Education" title="Academic background" />
+            <SubHeader title="Education" />
             {education.map((edu) => (
               <div key={edu.id} className="editorial-card flex gap-5 p-5">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-[var(--primary-light)] text-[var(--primary)]">
@@ -167,14 +175,14 @@ export default async function HomePage() {
 
         {leadership.length > 0 && (
           <div className="mt-10">
-            <SectionHeader label="Leadership" title="Organizational roles" />
+            <SubHeader title="Leadership" />
             <ExperienceTimeline items={leadership} />
           </div>
         )}
 
         {certifications.length > 0 && (
           <div className="mt-10">
-            <SectionHeader label="Certifications" title="Professional Credentials" />
+            <SubHeader title="Certifications" />
             <div className="grid gap-3 sm:grid-cols-2">
               {certifications.map((cert) => (
                 <div key={cert.id} className="editorial-card flex items-start gap-3 p-4">
@@ -196,7 +204,7 @@ export default async function HomePage() {
 
         {publications.length > 0 && (
           <div className="mt-10">
-            <SectionHeader label="Publications" title="Research output" />
+            <SubHeader title="Publications" />
             {publications.map((pub) => (
               <div key={pub.id} className="editorial-card p-5">
                 <p className="mb-1 font-mono-label text-[0.65rem] uppercase tracking-wide text-[var(--primary)]">
@@ -208,6 +216,17 @@ export default async function HomePage() {
                   <p className="mt-2 text-[0.85rem] leading-relaxed text-[var(--text-secondary)]">
                     {pub.description}
                   </p>
+                )}
+                {PUBLICATION_LINKS[pub.title] && (
+                  <a
+                    href={PUBLICATION_LINKS[pub.title]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-arrow mt-3"
+                  >
+                    <ExternalLink size={13} />
+                    View on IEEE Xplore
+                  </a>
                 )}
               </div>
             ))}
@@ -252,6 +271,36 @@ export default async function HomePage() {
                 </li>
               )}
             </ul>
+
+            {(profile.linkedin_url || profile.github_url) && (
+              <div className="mt-8">
+                <p className="section-tag mb-3">Find me online</p>
+                <div className="flex gap-3">
+                  {profile.linkedin_url && (
+                    <a
+                      href={profile.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
+                    >
+                      <LinkedInIcon size={18} />
+                    </a>
+                  )}
+                  {profile.github_url && (
+                    <a
+                      href={profile.github_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] border border-[var(--border)] text-[var(--text-secondary)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
+                    >
+                      <GitHubIcon size={18} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           <ContactForm />
         </div>

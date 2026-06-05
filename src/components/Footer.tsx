@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const footerLinks = [
-  { href: "/", label: "Home" },
-  { href: "/skills", label: "About" },
-  { href: "/portfolio", label: "Projects" },
-  { href: "/experience", label: "Experience" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#home", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Footer() {
@@ -16,9 +16,9 @@ export default function Footer() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
-    <footer className="border-t border-[var(--border-light)] bg-[var(--bg-primary)] px-8 py-10">
-      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-6 md:flex-row md:justify-between">
-        <nav className="flex flex-wrap justify-center gap-6">
+    <footer className="border-t border-[var(--border-light)] bg-[var(--bg-primary)] px-6 py-8 sm:px-8">
+      <div className="mx-auto flex max-w-[1100px] flex-col items-center gap-5 md:flex-row md:justify-between">
+        <nav className="flex flex-wrap justify-center gap-5">
           {footerLinks.map((link) => (
             <Link
               key={link.href}

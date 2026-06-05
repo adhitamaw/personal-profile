@@ -38,8 +38,7 @@ export default function ProjectsView({
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div />
+      <div className="mb-4 flex justify-end">
         <div className="flex gap-1 rounded-[var(--radius-sm)] border border-[var(--border-light)] bg-[var(--bg-secondary)] p-1">
           <button
             type="button"
@@ -77,12 +76,12 @@ export default function ProjectsView({
           </div>
 
           {others.length > 0 && (
-            <div className="mt-12">
-              <h3 className="font-display mb-1 text-xl font-semibold">Notable projects</h3>
-              <p className="mb-6 text-[0.85rem] text-[var(--text-secondary)]">
+            <div className="mt-6 border-t border-[var(--border-light)] pt-6">
+              <h3 className="font-display mb-1 text-lg font-semibold">Notable projects</h3>
+              <p className="mb-4 text-[0.85rem] text-[var(--text-secondary)]">
                 Other independent work, utility apps, and academic contributions.
               </p>
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-3">
                 {others.map((project) => (
                   <article
                     key={project.id}

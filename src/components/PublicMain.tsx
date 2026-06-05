@@ -7,6 +7,6 @@ export default function PublicMain({ children }: { children: React.ReactNode }) 
   const isAdmin = pathname.startsWith("/admin");
 
   return (
-    <main className={`flex-1 ${isAdmin ? "" : ""}`}>{children}</main>
+    <main className={`flex-1 ${isAdmin ? "" : "pt-[72px]"}`}>{children}</main>
   );
 }

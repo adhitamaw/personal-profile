@@ -1,65 +1,151 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Download } from "lucide-react";
+import DataProfileCard from "@/components/DataProfileCard";
+import SectionHeader from "@/components/SectionHeader";
+import ProjectCard from "@/components/ProjectCard";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
+import { assetUrl } from "@/lib/assets";
+import { getProfile, getExperiences, getProjects } from "@/lib/data";
 
-export default function Home() {
+export default async function HomePage() {
+  const [profile, workExp, projects] = await Promise.all([
+    getProfile(),
+    getExperiences("work"),
+    getProjects(true),
+  ]);
+
+  const nameParts = profile.name.split(" ");
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div>
+      {/* Hero */}
+      <section className="relative flex min-h-screen flex-col justify-center px-8 pb-12 pt-28">
+        <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 items-center gap-12 lg:grid-cols-[1.2fr_0.9fr]">
+          <div className="flex flex-col items-start">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--border-light)] px-3 py-1 font-mono-label text-[0.65rem] uppercase tracking-[2px] text-[var(--secondary)]">
+              <span className="h-1 w-1 rounded-full bg-[var(--secondary)]" />
+              Open to opportunities
+            </div>
+
+            <h1 className="font-display text-[clamp(2.5rem,6vw,4.2rem)] font-bold leading-[1.05] tracking-[-1.5px]">
+              {nameParts[0]}{" "}
+              <span className="italic text-[var(--primary)]">
+                {nameParts.slice(1).join(" ")}
+              </span>
+            </h1>
+
+            <p className="mt-4 max-w-[480px] text-base leading-relaxed text-[var(--text-secondary)]">
+              Data Analyst & Backend Developer. Passionate about Data Engineering,
+              Machine Learning, and building impactful web solutions.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link href="/portfolio" className="btn btn-primary">
+                View My Work
+                <ArrowRight size={16} />
+              </Link>
+              {profile.cv_url ? (
+                <a
+                  href={assetUrl(profile.cv_url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                >
+                  <Download size={16} />
+                  Download CV
+                </a>
+              ) : (
+                <Link href="/contact" className="btn btn-outline">
+                  Get in Touch
+                </Link>
+              )}
+            </div>
+          </div>
+
+          <DataProfileCard profile={profile} />
+        </div>
+
+        {/* Metrics bar */}
+        <div className="mx-auto mt-12 flex w-full max-w-[800px] flex-wrap items-center justify-center gap-8 border-y border-[var(--border-light)] px-8 py-5">
+          {[
+            { num: "99.09%", label: "Research ML Accuracy" },
+            { num: "45s → 10s", label: "TAM Dashboard Speedup" },
+            { num: "3+ Years", label: "Tech Exploration" },
+          ].map((m, i) => (
+            <div key={m.label} className="flex items-center gap-8">
+              {i > 0 && (
+                <div className="hidden h-8 w-px bg-[var(--border)] sm:block" />
+              )}
+              <div className="flex flex-col items-center gap-1">
+                <span className="font-mono-label text-[1.1rem] font-bold text-[var(--primary)]">
+                  {m.num}
+                </span>
+                <span className="text-center font-mono-label text-[0.65rem] uppercase tracking-wider text-[var(--text-muted)]">
+                  {m.label}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-[0.6rem] uppercase tracking-[2px] text-[var(--text-muted)] opacity-60">
+          Scroll to explore
+          <div className="scroll-line" />
+        </div>
+      </section>
+
+      {/* Preview sections */}
+      <section className="mx-auto max-w-[1100px] px-8 py-20">
+        <SectionHeader
+          label="Portfolio"
+          title="Featured projects"
+          description="A selection of projects from internships, research, and independent work."
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className="grid gap-6 md:grid-cols-2">
+          {projects.slice(0, 4).map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+        <div className="mt-8">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 font-mono-label text-[0.75rem] text-[var(--primary)] hover:underline"
+          >
+            View all projects <ArrowRight size={14} />
+          </Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1100px] px-8 py-20">
+        <SectionHeader
+          label="Experience"
+          title="Career timeline"
+          description="Professional journey across data analytics, backend development, and AI integration."
+        />
+        <ExperienceTimeline items={workExp} />
+        <div className="mt-8">
+          <Link
+            href="/experience"
+            className="inline-flex items-center gap-2 font-mono-label text-[0.75rem] text-[var(--primary)] hover:underline"
+          >
+            Full experience <ArrowRight size={14} />
+          </Link>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1100px] px-8 py-20">
+        <div className="editorial-card rounded-[var(--radius)] p-10 text-center">
+          <h2 className="font-display text-2xl font-bold md:text-3xl">
+            Let&apos;s work together
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-[var(--text-secondary)]">
+            Have a project in mind or just want to say hi? Reach out!
           </p>
+          <Link href="/contact" className="btn btn-primary mt-6">
+            Contact Me <ArrowRight size={16} />
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }

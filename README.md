@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Adhitama Wichaksono
 
-## Getting Started
+Website personal profile dengan Next.js dan Supabase, dilengkapi halaman admin untuk mengelola konten.
 
-First, run the development server:
+## Fitur
+
+- **Home** — Hero section, ringkasan experience, featured projects, dan skills
+- **Experience** — Career timeline, pendidikan, leadership, sertifikasi, publikasi
+- **Portfolio** — Daftar proyek dengan tags dan filter featured
+- **Skills** — Skill groups dengan kategori
+- **Contact** — Form kontak + informasi kontak
+- **Admin Panel** — Dashboard CRUD untuk profile, experience, projects, skills, dan messages
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Supabase (Database + Auth)
+- Lucide React (icons)
+- Framer Motion
+
+## Quick Start
 
 ```bash
+cd portfolio-adhitama
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Tanpa Supabase, website tetap berjalan dengan data seed dari portofolio asli.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup Supabase
 
-## Learn More
+1. Buat project di [supabase.com](https://supabase.com)
+2. Jalankan `supabase/schema.sql` di SQL Editor
+3. Jalankan `supabase/seed.sql` untuk data awal
+4. Buat user admin di Authentication → Users
+5. Copy `.env.local.example` ke `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. Restart dev server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Admin Panel
 
-## Deploy on Vercel
+- URL: [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
+- Login dengan akun Supabase Auth yang sudah dibuat
+- Kelola konten di `/admin`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Struktur Project
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── page.tsx              # Home
+│   ├── experience/           # Experience page
+│   ├── portfolio/            # Portfolio page
+│   ├── skills/               # Skills page
+│   ├── contact/              # Contact page
+│   └── admin/
+│       ├── login/            # Admin login
+│       └── (panel)/          # Admin dashboard & CRUD
+├── components/               # UI components
+└── lib/
+    ├── data.ts               # Data fetching layer
+    ├── seed-data.ts          # Fallback data
+    └── supabase/             # Supabase clients
+```
+
+## Deploy
+
+Deploy ke Vercel dan set environment variables Supabase di project settings.
+
+```bash
+npm run build
+```

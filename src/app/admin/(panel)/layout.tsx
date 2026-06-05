@@ -8,7 +8,9 @@ export default function AdminPanelLayout({
   return (
     <div className="min-h-screen bg-background">
       <AdminSidebar />
-      <div className="ml-64 min-h-screen p-8">{children}</div>
+      <div className="min-h-screen px-4 pb-10 pt-20 sm:px-6 lg:ml-64 lg:px-8 lg:pt-8">
+        {children}
+      </div>
     </div>
   );
 }

@@ -101,7 +101,7 @@ export default function AdminExperiencePage() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Experience</h1>
           <p className="text-muted">Kelola pengalaman kerja, pendidikan, dan sertifikasi.</p>
@@ -109,7 +109,7 @@ export default function AdminExperiencePage() {
         <button
           type="button"
           onClick={() => startEdit()}
-          className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white"
+          className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white sm:self-auto"
         >
           <Plus size={16} /> Add New
         </button>
@@ -212,16 +212,16 @@ export default function AdminExperiencePage() {
         {items.map((item) => (
           <div
             key={item.id}
-            className="glass-card flex items-center justify-between rounded-xl p-4"
+            className="glass-card flex flex-col gap-3 rounded-xl p-4 sm:flex-row sm:items-center sm:justify-between"
           >
-            <div>
-              <span className="mr-2 rounded bg-accent/10 px-2 py-0.5 text-xs text-accent">
+            <div className="min-w-0">
+              <span className="mr-2 inline-block rounded bg-accent/10 px-2 py-0.5 text-xs text-accent">
                 {item.category}
               </span>
               <span className="font-medium">{item.title}</span>
               <span className="ml-2 text-sm text-muted">@ {item.organization}</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex shrink-0 gap-2">
               <button
                 type="button"
                 onClick={() => startEdit(item)}

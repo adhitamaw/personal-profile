@@ -136,7 +136,7 @@ export default function AdminSkillsPage() {
       <h1 className="mb-2 text-2xl font-bold">Skills</h1>
       <p className="mb-8 text-muted">Kelola grup skill dan daftar keahlian.</p>
 
-      <div className="glass-card mb-8 flex gap-3 rounded-2xl p-4">
+      <div className="glass-card mb-8 flex flex-col gap-3 rounded-2xl p-4 sm:flex-row">
         <AdminInput
           label=""
           id="new-group"
@@ -148,7 +148,7 @@ export default function AdminSkillsPage() {
         <button
           type="button"
           onClick={addGroup}
-          className="mt-auto inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white sm:mt-auto"
         >
           <Plus size={16} /> Add Group
         </button>

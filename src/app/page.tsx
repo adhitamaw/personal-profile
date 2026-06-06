@@ -37,14 +37,6 @@ const RESEARCH_RESOURCES = [
     label: "GitHub Source",
     href: "https://github.com/adhitamaw/Anomaly-Detection-using-Reinforcement-Learning",
   },
-  {
-    label: "PPT",
-    href: null,
-  },
-  {
-    label: "Skripsi",
-    href: null,
-  },
 ] as const;
 
 const HIGHLIGHTS = [

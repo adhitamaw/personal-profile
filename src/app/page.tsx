@@ -22,6 +22,33 @@ const PUBLICATION_LINKS: Record<string, string> = {
     "https://ieeexplore.ieee.org/document/11279087",
 };
 
+const HIGHLIGHTS = [
+  {
+    label: "Core Focus",
+    title: "Data Analytics + Backend",
+    description:
+      "Hands-on experience building dashboards, cleaning pipelines, and REST APIs for real projects.",
+  },
+  {
+    label: "Featured Result",
+    title: "45s → 10s",
+    description:
+      "Improved dashboard loading time through data model and DAX optimization at Toyota Astra Motor.",
+  },
+  {
+    label: "Publication",
+    title: "IEEE ICSECS Author",
+    description:
+      "Published research on anomaly detection using Q-Learning and Deep Q-Learning.",
+  },
+  {
+    label: "Certification",
+    title: "MSIB 6 + Bootcamps",
+    description:
+      "Completed AI Integration, Data Analytics, and Web Developer training tracks.",
+  },
+];
+
 export default async function HomePage() {
   const [profile, allExperiences, projects, skillGroups] = await Promise.all([
     getProfile(),
@@ -59,8 +86,10 @@ export default async function HomePage() {
             </h1>
 
             <p className="mt-3 max-w-[480px] text-base leading-relaxed text-[var(--text-secondary)]">
-              Data Analyst & Backend Developer. Passionate about Data Engineering,
-              Machine Learning, and building impactful web solutions.
+              Fresh graduate Informatics dari Telkom University dengan pengalaman
+              di Data Analytics, Backend Development, dan Data Visualization.
+              Fokus pada dashboard Power BI, REST API, data cleaning, dan solusi
+              web yang berdampak.
             </p>
 
             <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
@@ -91,6 +120,30 @@ export default async function HomePage() {
           </div>
         </div>
         <MetricsBar />
+      </section>
+
+      {/* Highlights */}
+      <section className="page-section mx-auto max-w-[1100px] px-6 sm:px-8">
+        <SectionHeader
+          label="Highlights"
+          title="CV snapshot"
+          description="Quick summary of the strongest points from my CV and portfolio."
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {HIGHLIGHTS.map((item) => (
+            <div key={item.title} className="editorial-card p-5">
+              <p className="font-mono-label mb-2 text-[0.62rem] uppercase tracking-[0.18em] text-[var(--primary)]">
+                {item.label}
+              </p>
+              <h3 className="font-display text-[1rem] font-semibold leading-tight">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-[0.84rem] leading-relaxed text-[var(--text-secondary)]">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* About */}

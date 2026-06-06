@@ -44,7 +44,7 @@ const HIGHLIGHTS = [
     label: "Core Focus",
     title: "Data Analytics + Backend",
     description:
-      "Hands-on experience building dashboards, cleaning pipelines, and REST APIs for real projects.",
+      "Built Power BI dashboards at Toyota Astra Motor and REST APIs for BP Batam.",
   },
   {
     label: "Featured Result",
@@ -62,7 +62,7 @@ const HIGHLIGHTS = [
     label: "Certification",
     title: "MSIB 6 + Bootcamps",
     description:
-      "Completed AI Integration, Data Analytics, and Web Developer training tracks.",
+      "Studied Go backend development in MSIB 6, followed by data and Laravel bootcamps.",
   },
 ];
 
@@ -103,10 +103,9 @@ export default async function HomePage() {
             </h1>
 
             <p className="mt-3 max-w-[480px] text-base leading-relaxed text-[var(--text-secondary)]">
-              Fresh graduate Informatics dari Telkom University dengan pengalaman
-              di Data Analytics, Backend Development, dan Data Visualization.
-              Fokus pada dashboard Power BI, REST API, data cleaning, dan solusi
-              web yang berdampak.
+              Informatics graduate from Telkom University with experience building
+              Power BI dashboards at Toyota Astra Motor and REST APIs for BP
+              Batam&apos;s SPPD system. I work with Python, SQL, Power BI, PHP, and Go.
             </p>
 
             <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
@@ -144,7 +143,7 @@ export default async function HomePage() {
         <SectionHeader
           label="Highlights"
           title="CV snapshot"
-          description="Quick summary of the strongest points from my CV and portfolio."
+          description="A few measurable results and milestones from my work."
         />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {HIGHLIGHTS.map((item) => (
@@ -171,14 +170,14 @@ export default async function HomePage() {
         />
         <div className="mb-6 max-w-none">
           <p className="mb-3 text-justify text-[0.92rem] leading-[1.75] text-[var(--text-secondary)]">
-            Fresh graduate in Informatics from Telkom University (GPA 3.34) with a
-            strong interest and hands-on experience in Data Analysis, Data Engineering,
-            Backend Development, and Web Development.
+            I graduated from Informatics at Telkom University with a 3.34 GPA. During
+            my internships, I worked on fleet sales dashboards at Toyota Astra Motor
+            and the backend for BP Batam&apos;s SPPD Mobile system.
           </p>
           <p className="text-justify text-[0.92rem] leading-[1.75] text-[var(--text-secondary)]">
-            Experienced as an intern at Toyota Astra Motor and BP Batam, and participated
-            in the Kampus Merdeka program (MSIB 6). Proficient in Python, SQL, Power BI,
-            Go, PHP, Laravel, with strong skills in data cleaning, EDA, and data visualization.
+            I also studied Go backend development through Kampus Merdeka MSIB 6 and
+            published research on network anomaly detection at IEEE ICSECS. My current
+            toolkit includes Python, SQL, Power BI, Go, PHP, Laravel, and PostgreSQL.
           </p>
         </div>
 

@@ -297,38 +297,29 @@ export default async function HomePage() {
                 )}
                 {pub.title ===
                   "Network Anomaly Detection for Intrusion Detection Systems Using Q-Learning and Deep Q-Learning" && (
-                  <div className="mt-4 rounded-2xl border border-[var(--border-light)] bg-[var(--bg-secondary)] p-4">
-                    <p className="font-mono-label mb-3 text-[0.6rem] uppercase tracking-[0.18em] text-[var(--text-muted)]">
-                      Research resources
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {RESEARCH_RESOURCES.map((item) =>
-                        item.href ? (
-                          <a
-                            key={item.label}
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-light)] bg-[var(--bg-card)] px-3 py-2 text-[0.7rem] font-semibold text-[var(--text-secondary)] shadow-sm transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
-                          >
-                            <ExternalLink size={12} />
-                            {item.label}
-                          </a>
-                        ) : (
-                          <span
-                            key={item.label}
-                            className="inline-flex items-center gap-1.5 rounded-xl border border-dashed border-[var(--border-light)] bg-[var(--bg-card)] px-3 py-2 text-[0.7rem] font-semibold text-[var(--text-muted)]"
-                            title="Kirim URL-nya supaya bisa diaktifkan"
-                          >
-                            {item.label}
-                          </span>
-                        )
-                      )}
-                    </div>
-                    <p className="mt-3 text-[0.78rem] leading-relaxed text-[var(--text-muted)]">
-                      Link yang sudah ada tampil sebagai badge aktif. Saya sisipkan slot
-                      untuk PPT dan skripsi, tinggal kirim URL-nya nanti saya aktifkan.
-                    </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {RESEARCH_RESOURCES.map((item) =>
+                      item.href ? (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border-light)] bg-[var(--bg-card)] px-3 py-1.5 font-mono-label text-[0.62rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
+                        >
+                          <ExternalLink size={11} />
+                          {item.label}
+                        </a>
+                      ) : (
+                        <span
+                          key={item.label}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-[var(--border-light)] bg-[var(--bg-card)] px-3 py-1.5 font-mono-label text-[0.62rem] font-semibold text-[var(--text-muted)]"
+                          title="Kirim URL-nya supaya bisa diaktifkan"
+                        >
+                          {item.label}
+                        </span>
+                      )
+                    )}
                   </div>
                 )}
               </div>

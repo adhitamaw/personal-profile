@@ -47,6 +47,26 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
 6. Restart dev server
 
+## Koneksi GitHub, Vercel, dan Supabase
+
+1. Push project ini ke repository GitHub milikmu.
+2. Import repository itu ke Vercel dari dashboard Vercel.
+3. Tambahkan environment variables berikut di Vercel untuk Production, Preview, dan Development:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
+```
+
+4. Di Supabase Dashboard, buka Authentication → URL Configuration lalu isi:
+    - Site URL: domain produksi Vercel kamu
+    - Additional Redirect URLs: `http://localhost:3000`, domain preview Vercel, dan domain produksi Vercel
+5. Jalankan `supabase/schema.sql` dan `supabase/seed.sql` setelah project Supabase dibuat.
+6. Jika ingin membuat akun admin awal, jalankan `node scripts/create-admin.mjs` setelah `.env.local` terisi.
+
+Catatan: repo ini sudah siap untuk local mode tanpa Supabase. Jika env Supabase belum diisi, website tetap tampil dengan data seed.
+
 ## Admin Panel
 
 - URL: [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
@@ -75,7 +95,9 @@ src/
 
 ## Deploy
 
-Deploy ke Vercel dan set environment variables Supabase di project settings.
+Deploy ke Vercel dari repository GitHub yang sudah terhubung, lalu set environment variables Supabase di project settings.
+
+Pastikan juga URL Supabase Auth sudah menunjuk ke domain Vercel supaya login admin dan cookie session bekerja di production.
 
 ```bash
 npm run build

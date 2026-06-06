@@ -117,7 +117,7 @@ export default function ProjectsView({
                         href={project.project_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono-label text-[0.65rem] text-[var(--text-muted)] hover:text-[var(--primary)]"
+                        className="inline-flex items-center gap-1 rounded-xl border border-[var(--border-light)] bg-[var(--bg-secondary)] px-3 py-1.5 font-mono-label text-[0.6rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                       >
                         GitHub →
                       </a>
@@ -177,7 +177,7 @@ export default function ProjectsView({
                           href={assetUrl(project.doc_url)}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mr-2 font-mono-label text-[0.65rem] text-[var(--text-muted)] hover:text-[var(--primary)]"
+                          className="mr-2 inline-flex items-center gap-1 rounded-xl border border-[var(--border-light)] bg-[var(--bg-secondary)] px-3 py-1.5 font-mono-label text-[0.6rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                         >
                           PDF
                         </a>
@@ -187,7 +187,7 @@ export default function ProjectsView({
                           href={project.project_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-mono-label text-[0.65rem] text-[var(--text-muted)] hover:text-[var(--primary)]"
+                          className="inline-flex items-center gap-1 rounded-xl border border-[var(--border-light)] bg-[var(--bg-secondary)] px-3 py-1.5 font-mono-label text-[0.6rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                         >
                           Git
                         </a>

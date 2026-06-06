@@ -82,7 +82,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               href={assetUrl(project.doc_url)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-mono-label text-[0.65rem] text-[var(--text-muted)] transition-colors hover:text-[var(--primary)]"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-light)] bg-[var(--bg-secondary)] px-3 py-2 font-mono-label text-[0.65rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
             >
               <FileText size={12} />
               PDF Report
@@ -93,7 +93,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               href={project.project_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-mono-label text-[0.65rem] text-[var(--text-muted)] transition-colors hover:text-[var(--primary)]"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--border-light)] bg-[var(--bg-secondary)] px-3 py-2 font-mono-label text-[0.65rem] font-semibold text-[var(--text-secondary)] transition-all hover:-translate-y-[1px] hover:border-[var(--primary)] hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
             >
               <ExternalLink size={12} />
               View

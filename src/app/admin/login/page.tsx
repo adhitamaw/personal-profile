@@ -17,20 +17,38 @@ export default function AdminLoginPage() {
   const [recoveryLoading, setRecoveryLoading] = useState(false);
 
   useEffect(() => {
+    if (!isSupabaseConfigured()) return;
+
+    const supabase = createClient();
     const searchParams = new URLSearchParams(window.location.search);
     const hash = window.location.hash.startsWith("#")
       ? window.location.hash.slice(1)
       : window.location.hash;
     const params = new URLSearchParams(hash);
     const type = params.get("type");
+    const authError = searchParams.get("error_description") || params.get("error_description");
 
     const recovery = type === "recovery" || searchParams.get("mode") === "recovery";
-    if (!recovery) return;
-    const timer = window.setTimeout(() => {
+    const enterRecoveryMode = () => {
       setIsRecoveryMode(true);
       setMessage("Buat password baru untuk akun admin kamu.");
+    };
+
+    const timer = window.setTimeout(() => {
+      if (recovery) enterRecoveryMode();
+      if (authError) setError(authError);
     }, 0);
-    return () => window.clearTimeout(timer);
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") enterRecoveryMode();
+    });
+
+    return () => {
+      window.clearTimeout(timer);
+      subscription.unsubscribe();
+    };
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -131,7 +149,9 @@ export default function AdminLoginPage() {
     setNewPassword("");
     window.location.hash = "";
     setIsRecoveryMode(false);
+    await supabase.auth.signOut();
     setRecoveryLoading(false);
+    router.refresh();
   }
 
   return (
@@ -157,26 +177,28 @@ export default function AdminLoginPage() {
             </div>
           )}
 
-          <div className="mb-5">
-            <label htmlFor="email" className="mb-2 block text-sm font-medium">
-              Email
-            </label>
-            <div className="relative">
-              <Mail
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
-              />
-              <input
-                id="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-card-border bg-background py-3 pl-10 pr-4 text-sm outline-none focus:border-accent"
-                placeholder="admin@email.com"
-              />
+          {!isRecoveryMode && (
+            <div className="mb-5">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium">
+                Email
+              </label>
+              <div className="relative">
+                <Mail
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted"
+                />
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-xl border border-card-border bg-background py-3 pl-10 pr-4 text-sm outline-none focus:border-accent"
+                  placeholder="admin@email.com"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="mb-6">
             <label htmlFor="password" className="mb-2 block text-sm font-medium">

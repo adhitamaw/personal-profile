@@ -17,13 +17,33 @@ function getTagStyle(tag: string) {
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const previewUrl = project.doc_url
+    ? assetUrl(project.doc_url)
+    : project.image_url
+      ? assetUrl(project.image_url)
+      : null;
+
   return (
     <article className="editorial-card group overflow-hidden hover:-translate-y-[3px]">
-      <div className="flex aspect-[16/10] items-center justify-center overflow-hidden bg-[var(--bg-secondary)]">
-        {project.image_url ? (
+      <div className="relative flex aspect-[16/10] overflow-hidden bg-[var(--bg-secondary)]">
+        {project.doc_url ? (
+          <>
+            <iframe
+              src={`${previewUrl}#page=1&view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+              title={`${project.title} PDF preview`}
+              className="h-full w-full border-0 bg-white"
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent p-3">
+              <span className="inline-flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 font-mono-label text-[0.55rem] uppercase tracking-widest text-white">
+                <FileText size={11} />
+                PDF Preview
+              </span>
+            </div>
+          </>
+        ) : project.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={assetUrl(project.image_url)}
+            src={previewUrl ?? undefined}
             alt={project.title}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           />

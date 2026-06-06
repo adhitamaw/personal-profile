@@ -38,6 +38,11 @@ if (!url || !key) {
   process.exit(1);
 }
 
+if (!email || !password) {
+  console.error("ADMIN_EMAIL dan ADMIN_PASSWORD wajib diisi sebagai environment variable.");
+  process.exit(1);
+}
+
 const headers = {
   apikey: key,
   Authorization: `Bearer ${key}`,

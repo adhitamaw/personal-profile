@@ -24,16 +24,13 @@ export default function AdminLoginPage() {
     const params = new URLSearchParams(hash);
     const type = params.get("type");
 
-    if (type === "recovery") {
+    const recovery = type === "recovery" || searchParams.get("mode") === "recovery";
+    if (!recovery) return;
+    const timer = window.setTimeout(() => {
       setIsRecoveryMode(true);
       setMessage("Buat password baru untuk akun admin kamu.");
-      return;
-    }
-
-    if (searchParams.get("mode") === "recovery") {
-      setIsRecoveryMode(true);
-      setMessage("Buat password baru untuk akun admin kamu.");
-    }
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -144,9 +141,9 @@ export default function AdminLoginPage() {
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent">
             <Lock size={24} />
           </div>
-          <h1 className="text-2xl font-bold">Admin Login</h1>
+          <h1 className="text-2xl font-bold">Portfolio Admin</h1>
           <p className="mt-2 text-sm text-muted">
-            Sign in to manage your portfolio content
+            Sign in to manage your portfolio content.
           </p>
         </div>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   LayoutDashboard,
   User,
@@ -30,11 +30,6 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
-
-  // Close the mobile drawer whenever the route changes.
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   async function handleLogout() {
     setOpen(false);
@@ -79,10 +74,10 @@ export default function AdminSidebar() {
       >
         <div className="flex items-center justify-between border-b border-card-border p-6">
           <div>
-            <Link href="/admin" className="text-lg font-bold gradient-text">
-              Admin Panel
+            <Link href="/admin" className="font-display text-lg font-bold text-foreground">
+              Portfolio Admin
             </Link>
-            <p className="mt-1 text-xs text-muted">Portfolio Management</p>
+            <p className="mt-1 text-xs text-muted">Content management</p>
           </div>
           <button
             type="button"

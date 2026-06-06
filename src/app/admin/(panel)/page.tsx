@@ -6,7 +6,9 @@ import {
   Sparkles,
   Mail,
   ArrowRight,
+  ExternalLink,
 } from "lucide-react";
+import { AdminPageHeader } from "@/components/admin/AdminUi";
 import {
   getProfile,
   getExperiences,
@@ -45,29 +47,39 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-muted">
-          Welcome back! Manage content for {profile.name}&apos;s portfolio.
-        </p>
-      </div>
+      <AdminPageHeader
+        title="Dashboard"
+        description={`Welcome back. Manage ${profile.name}'s portfolio content from one place.`}
+        action={
+          <Link
+            href="/"
+            target="_blank"
+            className="inline-flex items-center gap-2 rounded-lg border border-card-border bg-card px-4 py-2 text-sm font-semibold hover:border-accent hover:text-accent"
+          >
+            <ExternalLink size={15} /> View website
+          </Link>
+        }
+      />
 
       <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.label} className="glass-card rounded-2xl p-5">
+          <div key={stat.label} className="glass-card p-5">
             <p className="text-3xl font-bold text-accent">{stat.value}</p>
             <p className="text-sm text-muted">{stat.label}</p>
           </div>
         ))}
       </div>
 
-      <h2 className="mb-4 text-lg font-semibold">Quick Actions</h2>
+      <div className="mb-4">
+        <h2 className="text-lg font-semibold">Manage content</h2>
+        <p className="mt-1 text-sm text-muted">Choose a section to update.</p>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
           <Link
             key={card.href}
             href={card.href}
-            className="glass-card group flex items-center justify-between rounded-2xl p-5 transition-all hover:border-accent/30"
+            className="glass-card group flex items-center justify-between p-5 transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm"
           >
             <div className="flex items-center gap-3">
               <card.icon className={card.color} size={22} />

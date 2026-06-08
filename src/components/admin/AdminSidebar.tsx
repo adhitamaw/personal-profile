@@ -56,6 +56,15 @@ export default function AdminSidebar() {
         <Link href="/admin" className="text-base font-bold gradient-text">
           Admin Panel
         </Link>
+        <button
+          type="button"
+          onClick={handleLogout}
+          aria-label="Logout"
+          title="Logout"
+          className="ml-auto flex h-9 w-9 items-center justify-center rounded-lg text-red-400 transition-colors hover:bg-red-500/10"
+        >
+          <LogOut size={18} />
+        </button>
       </header>
 
       {/* Backdrop (mobile only, when drawer open) */}
@@ -113,7 +122,7 @@ export default function AdminSidebar() {
           })}
         </nav>
 
-        <div className="space-y-1 border-t border-card-border p-4">
+        <div className="shrink-0 space-y-1 border-t border-card-border p-4">
           <Link
             href="/"
             target="_blank"
